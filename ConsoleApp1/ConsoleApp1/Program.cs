@@ -18,6 +18,10 @@ namespace ConsoleApp1
             // 'server=' name of the server
             // 'database=' name of the database we want to use
             // 'trusted_connection =  true' for windows authentication 
+
+            con.ConnectionString = "Data Source = NOOB; Initial Catalog = DemoProj; Integrated Security = true";
+            //
+
             con.Open(); // Initiating Database Connection
             // 'con' now represents the data base 
             Console.WriteLine("Connection Successful"); // indicator of connection established 
