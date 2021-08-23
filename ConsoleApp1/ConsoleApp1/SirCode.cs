@@ -5,7 +5,7 @@ using System.Data.SqlClient;
 
 namespace ado1
 {
-    class Program
+    class SirQ1
     {
         static void Main(string[] args)
         {
