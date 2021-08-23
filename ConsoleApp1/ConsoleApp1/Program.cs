@@ -12,6 +12,9 @@ namespace ConsoleApp1
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
+            // As our provider is SQL Server we need SQL connection 
+            SqlConnection con = new SqlConnection();
+            
         }
     }
 }
