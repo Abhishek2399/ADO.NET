@@ -459,9 +459,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\capgemini\\training\\technical\\ADO.NET\\ConsoleApp1\\ConsoleApp1\\ConsoleApp1.csproj",
-      "projectName": "ConsoleApp1",
-      "projectPath": "D:\\capgemini\\training\\technical\\ADO.NET\\ConsoleApp1\\ConsoleApp1\\ConsoleApp1.csproj",
+      "projectUniqueName": "D:\\capgemini\\training\\technical\\ADO.NET\\ConsoleApp1\\ConsoleApp1\\BasicConnectionQueries.csproj",
+      "projectName": "BasicConnectionQueries",
+      "projectPath": "D:\\capgemini\\training\\technical\\ADO.NET\\ConsoleApp1\\ConsoleApp1\\BasicConnectionQueries.csproj",
       "packagesPath": "C:\\Users\\Abhishek\\.nuget\\packages\\",
       "outputPath": "D:\\capgemini\\training\\technical\\ADO.NET\\ConsoleApp1\\ConsoleApp1\\obj\\",
       "projectStyle": "PackageReference",

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "oGtbfeNpdPdyJmbjHXMmoaLGUY5aFjA+rxKV9Zoss6WKnEc0o8SaaSAQEWnuMOdJQfAoi+lgvSFMMxOKO6XEhQ==",
+  "dgSpecHash": "x2GT7nNJqgDA8Adl0Dd0igTDKwvMwnZeiux6oftoA3Fe8YsnaTO/74kmvp1w+zMzeYBiQRUe+LeeJGQPst6Nug==",
   "success": true,
-  "projectFilePath": "D:\\capgemini\\training\\technical\\ADO.NET\\ConsoleApp1\\ConsoleApp1\\ConsoleApp1.csproj",
+  "projectFilePath": "D:\\capgemini\\training\\technical\\ADO.NET\\ConsoleApp1\\ConsoleApp1\\BasicConnectionQueries.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Abhishek\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\Abhishek\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",

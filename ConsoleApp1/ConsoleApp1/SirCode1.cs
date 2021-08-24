@@ -13,17 +13,11 @@ namespace ado1
             SqlConnection condb = new SqlConnection("server=AEPL7-PC;database=CUSTOMERDB;trusted_connection=True");
             condb.Open();
 
-
-
             SqlCommand cmd = new SqlCommand("select * from emps", condb);
             //cmd.CommandText = "select * from emps";
             //cmd.Connection = condb;
 
-
-
             SqlDataReader red = cmd.ExecuteReader();
-
-
 
             while (red.Read() == true)
             {
@@ -32,14 +26,7 @@ namespace ado1
                 Console.WriteLine("------------------------");
             }
 
-
-
-
             condb.Close();
-
-
-
-
 
         }
     }
