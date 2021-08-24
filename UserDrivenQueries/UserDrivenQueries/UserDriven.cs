@@ -14,7 +14,7 @@ namespace UserDrivenQueries
         static SqlDataReader sdr; // reader to read one record at a time
 
         #region Login
-        public static void Login() // checking if the data is present 
+        public static void Login() // checking if we are valid to get the entries
         {
             // var to hold is user present or not
             Console.WriteLine("==================== Login User ====================");
@@ -134,9 +134,9 @@ namespace UserDrivenQueries
                 uName = Console.ReadLine();
 
                 cmd.Connection = con;
-                cmd.CommandText = "Delete from Users where uid = @uname"; // better and safe way of injecting data 
+                cmd.CommandText = "Delete from Users where uid = @uid"; // better and safe way of injecting data 
                 // inserting record 
-                cmd.Parameters.AddWithValue("@uname", uName);
+                cmd.Parameters.AddWithValue("@uid", uName);
 
                 int isDeleted = cmd.ExecuteNonQuery(); // 1 -> successful execution, 0 -> UnSucessful Execution 
                 cmd.Parameters.Clear();
@@ -201,7 +201,7 @@ namespace UserDrivenQueries
             try
             {
                 if (sdr != null) // check is reader is opened before 
-                    sdr.Close(); // CLose any pre-existing reader
+                    sdr.Close(); // Close any pre-existing reader
                 //------------- <Sql Command initiation> ------------- 
                 cmd.Connection = con; // connection between the command obj and the db conn
                 cmd.CommandText = "Select * from Users where uid = @uname"; // Query we want to execute 
@@ -244,7 +244,7 @@ namespace UserDrivenQueries
                 con.ConnectionString = "Data Source = NOOB; Initial Catalog = ADODay2; Integrated Security = true";
                 // "Data Source" : Server where our db is present 
                 // "Initial Catalog" : Name of the Db
-                // "Integrated Security" : Windows Authentication / manual user name / password 
+                // "Integrated Security" : Windows Authentication / manual user name / password
 
                 // alternate connection string 
                 con.ConnectionString = "Server = NOOB; Database = ADODay2; Trusted_connection = true";

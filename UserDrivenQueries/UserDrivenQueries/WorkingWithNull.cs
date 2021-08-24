@@ -24,8 +24,9 @@ namespace UserDrivenQueries
                 while (sdr.Read())
                 {
                     int rollno = sdr.IsDBNull(0) ? 0 : (int)sdr.GetValue(0); // replacing null values in the code with the "IsDBNull" function returns true if the value in the column is null
-                    string name = sdr.IsDBNull(1) ? "Null" : (string)sdr.GetValue(1);
+                    string name = sdr.IsDBNull(1) ? "null" : (string)sdr.GetValue(1);
                     Console.WriteLine($"Name : {name}\nRoll No. : {rollno}\n");
+
                 }
             }
             catch(Exception ex)
