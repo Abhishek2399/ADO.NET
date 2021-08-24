@@ -29,6 +29,7 @@ namespace UserDrivenQueries
                 //------------- <Sql Command initiation> ------------- 
                 cmd.Connection = con; // connection between the command obj and the db conn
                 // not a good way to pass parameters, this my lead to sql injection 
+                // direct way of injecting data, not secured
                 cmd.CommandText = $"Select * from Users where uid = '{uName}' and pwd = '{uPass}'"; // Checking for availability of single user
                 sdr = cmd.ExecuteReader(); // Executing the reading command as our command will send us block of data
                 bool isPresent = sdr.HasRows;
@@ -81,6 +82,65 @@ namespace UserDrivenQueries
         }
 
 
+        public static void AddUser()
+        {
+            try
+            {
+                string uName, uPass;
+                Console.WriteLine("Enter the User : ");
+                uName = Console.ReadLine();
+
+                Console.WriteLine("Enter the Password : ");
+                uPass = Console.ReadLine();
+
+                cmd.Connection = con;
+                cmd.CommandText = "Insert into Users values(@p1, @p2)"; // better and safe way of injecting data 
+                // inserting record 
+                cmd.Parameters.AddWithValue("@p1", uName);
+                cmd.Parameters.AddWithValue("@p2", uPass);
+
+                int isExecuted = cmd.ExecuteNonQuery(); // 1 -> successful execution, 0 -> UnSucessful Execution 
+                if (isExecuted > 0)
+                {
+                    Console.WriteLine("User Added Successfully");
+                    return;
+                }
+                Console.WriteLine("User Not Added");
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public static void DelUser()
+        {
+            try
+            {
+                string uName, uPass;
+                Console.WriteLine("Enter the User : ");
+                uName = Console.ReadLine();
+
+                cmd.Connection = con;
+                cmd.CommandText = "Delete from Users uid = @p1"; // better and safe way of injecting data 
+                // inserting record 
+                cmd.Parameters.AddWithValue("@p1", uName);
+
+                int isExecuted = cmd.ExecuteNonQuery(); // 1 -> successful execution, 0 -> UnSucessful Execution 
+                if (isExecuted > 0)
+                {
+                    Console.WriteLine("User Deleted Successfully");
+                    return;
+                }
+                Console.WriteLine("User Not Found");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
         static void Main(string[] args)
         {
             try
@@ -98,7 +158,8 @@ namespace UserDrivenQueries
                 Console.WriteLine("Connection Successful");
                 //---------------------<>----------------------------------
 
-                Login();
+                //Login();
+                AddUser();
 
             }
             catch (Exception ex)
