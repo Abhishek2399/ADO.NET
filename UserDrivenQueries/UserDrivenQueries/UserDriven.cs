@@ -60,7 +60,6 @@ namespace UserDrivenQueries
         public static void ShowUsers()
         {
             Console.WriteLine("==================== Show Users ====================");
-
             try
             {
                 if (sdr != null) // check is reader is opened before 
