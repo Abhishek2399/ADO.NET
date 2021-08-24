@@ -99,8 +99,10 @@ namespace UserDrivenQueries
                 cmd.Parameters.AddWithValue("@p1", uName);
                 cmd.Parameters.AddWithValue("@p2", uPass);
 
-                int isExecuted = cmd.ExecuteNonQuery(); // 1 -> successful execution, 0 -> UnSucessful Execution 
-                if (isExecuted > 0)
+                int isInserted = cmd.ExecuteNonQuery(); // 1 -> successful execution, 0 -> UnSucessful Execution 
+                cmd.Parameters.Clear();
+
+                if (isInserted > 0)
                 {
                     Console.WriteLine("User Added Successfully");
                     return;
@@ -122,12 +124,13 @@ namespace UserDrivenQueries
                 uName = Console.ReadLine();
 
                 cmd.Connection = con;
-                cmd.CommandText = "Delete from Users uid = @p1"; // better and safe way of injecting data 
+                cmd.CommandText = "Delete from Users where uid = @p1"; // better and safe way of injecting data 
                 // inserting record 
                 cmd.Parameters.AddWithValue("@p1", uName);
 
-                int isExecuted = cmd.ExecuteNonQuery(); // 1 -> successful execution, 0 -> UnSucessful Execution 
-                if (isExecuted > 0)
+                int isDeleted = cmd.ExecuteNonQuery(); // 1 -> successful execution, 0 -> UnSucessful Execution 
+                cmd.Parameters.Clear();
+                if (isDeleted > 0)
                 {
                     Console.WriteLine("User Deleted Successfully");
                     return;
@@ -158,8 +161,8 @@ namespace UserDrivenQueries
                 Console.WriteLine("Connection Successful");
                 //---------------------<>----------------------------------
 
-                //Login();
-                AddUser();
+                DelUser();
+                Login();
 
             }
             catch (Exception ex)
