@@ -38,6 +38,43 @@ namespace UserDrivenQueries
             }
         }
 
+        public static void GetStudByRoll()
+        {
+            try
+            {
+                if (sdr != null)
+                    sdr.Close();
+                Console.WriteLine("Enter the Roll no To Search");
+                int rollNo = Convert.ToInt32(Console.ReadLine());
+
+                cmd.Connection = con;
+                cmd.CommandText = "Select * from Student where rollno = @rollno";
+                cmd.Parameters.AddWithValue("@rollno", rollNo);
+                sdr = cmd.ExecuteReader();
+                sdr.Read();
+                if(sdr.HasRows)
+                {
+                    int rollno = sdr.IsDBNull(0) ? 0 : (int)sdr.GetValue(0); // replacing null values in the code with the "IsDBNull" function returns true if the value in the column is null
+                    string name = sdr.IsDBNull(1) ? "Null" : (string)sdr.GetValue(1);
+                    Console.WriteLine($"Name : {name}\nRoll No. : {rollno}\n");
+                }
+                else
+                {
+                    
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                sdr.Close();
+            }
+        }
+
+
+
         public static bool AddStudent()
         {
             try
@@ -88,6 +125,7 @@ namespace UserDrivenQueries
                 con.Open();
                 AddStudent();
                 GetAllStuds();
+                GetStudByRoll();
                 
             }
             catch(Exception ex)
