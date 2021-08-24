@@ -103,10 +103,10 @@ namespace UserDrivenQueries
                 uPass = Console.ReadLine();
 
                 cmd.Connection = con;
-                cmd.CommandText = "Insert into Users values(@p1, @p2)"; // better and safe way of injecting data 
+                cmd.CommandText = "Insert into Users values(@uname, @upass)"; // better and safe way of injecting data 
                 // inserting record 
-                cmd.Parameters.AddWithValue("@p1", uName);
-                cmd.Parameters.AddWithValue("@p2", uPass);
+                cmd.Parameters.AddWithValue("@uname", uName);
+                cmd.Parameters.AddWithValue("@upass", uPass);
 
                 int isInserted = cmd.ExecuteNonQuery(); // 1 -> successful execution, 0 -> UnSucessful Execution 
                 cmd.Parameters.Clear();
@@ -132,14 +132,14 @@ namespace UserDrivenQueries
             Console.WriteLine("==================== Delete User ====================");
             try
             {
-                string uName, uPass;
+                string uName;
                 Console.WriteLine("Enter the User : ");
                 uName = Console.ReadLine();
 
                 cmd.Connection = con;
-                cmd.CommandText = "Delete from Users where uid = @p1"; // better and safe way of injecting data 
+                cmd.CommandText = "Delete from Users where uid = @uname"; // better and safe way of injecting data 
                 // inserting record 
-                cmd.Parameters.AddWithValue("@p1", uName);
+                cmd.Parameters.AddWithValue("@uname", uName);
 
                 int isDeleted = cmd.ExecuteNonQuery(); // 1 -> successful execution, 0 -> UnSucessful Execution 
                 cmd.Parameters.Clear();
@@ -148,7 +148,7 @@ namespace UserDrivenQueries
                     Console.WriteLine($"{uName} User Deleted Successfully");
                     return;
                 }
-                Console.WriteLine($"{uName} User Not Found");
+                Console.WriteLine($"{uName} Not Found");
             }
             catch (Exception ex)
             {
@@ -157,6 +157,79 @@ namespace UserDrivenQueries
         }
         #endregion
 
+
+        #region Update User Pass
+        public static void UpdateUser()
+        {
+            Console.WriteLine("==================== Update User ====================");
+            try
+            {
+                string uName, uPass;
+                Console.WriteLine("Enter the User : ");
+                uName = Console.ReadLine();
+
+                Console.WriteLine("Enter New Password : ");
+                uPass = Console.ReadLine();
+
+
+                cmd.Connection = con;
+                cmd.CommandText = "Update Users set pwd = @upass where uid = @uname;"; // better and safe way of injecting data 
+                // inserting record 
+                cmd.Parameters.AddWithValue("@uname", uName);
+                cmd.Parameters.AddWithValue("@upass", uPass);
+
+
+                int isUpdated = cmd.ExecuteNonQuery(); // 1 -> successful execution, 0 -> UnSucessful Execution 
+                cmd.Parameters.Clear();
+                if (isUpdated > 0)
+                {
+                    Console.WriteLine($"{uName} User Updated Successfully");
+                    ShowUserByName(uName);
+                    return;
+                }
+                Console.WriteLine($"{uName} Not Found");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        #endregion
+
+        #region Specific User Details By Name
+        public static void ShowUserByName(string uName)
+        {
+            Console.WriteLine("==================== Show User By Name ====================");
+
+            try
+            {
+                if (sdr != null) // check is reader is opened before 
+                    sdr.Close(); // CLose any pre-existing reader
+                //------------- <Sql Command initiation> ------------- 
+                cmd.Connection = con; // connection between the command obj and the db conn
+                cmd.CommandText = "Select * from Users where uid = @uname"; // Query we want to execute 
+
+                cmd.Parameters.AddWithValue("@uname", uName);
+                sdr = cmd.ExecuteReader(); // Executing the reading command as our command will send us block of data
+                Console.WriteLine("-----------------------------------");
+                while (sdr.Read()) // .Read() will return true if data is present in the table 
+                {
+                    Console.WriteLine($"User : {sdr.GetValue(0)}   Pass : {sdr.GetValue(1)}");
+                    Console.WriteLine("-----------------------------------");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                sdr.Close();
+            }
+        }
+
+        #endregion
 
         static void Main(string[] args)
         {
@@ -175,8 +248,7 @@ namespace UserDrivenQueries
                 Console.WriteLine("Connection Successful");
                 //---------------------<>----------------------------------
 
-                DelUser();
-                Login();
+                UpdateUser();
 
             }
             catch (Exception ex)
