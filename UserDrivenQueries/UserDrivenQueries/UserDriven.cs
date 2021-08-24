@@ -18,9 +18,8 @@ namespace UserDrivenQueries
             // var to hold is user present or not             
             try
             {
-                if (sdr != null) {
+                if (sdr != null) // check is reader opened earlier 
                     sdr.Close(); // CLose any pre-existing reader
-                }
                 Console.WriteLine("Enter the User : ");
                 string uName = Console.ReadLine();
 
@@ -57,10 +56,8 @@ namespace UserDrivenQueries
         {
             try
             {
-                if (sdr != null)
-                {
+                if (sdr != null) // check is reader is opened before 
                     sdr.Close(); // CLose any pre-existing reader
-                }
                 //------------- <Sql Command initiation> ------------- 
                 cmd.Connection = con; // connection between the command obj and the db conn
                 cmd.CommandText = "Select * from Users"; // Query we want to execute 
