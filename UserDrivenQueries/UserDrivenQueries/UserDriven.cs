@@ -13,10 +13,54 @@ namespace UserDrivenQueries
      
         static SqlDataReader sdr; // reader to read one record at a time
 
+        public static void Login() // checking if the data is present 
+        {
+            // var to hold is user present or not             
+            try
+            {
+                if (sdr != null) {
+                    sdr.Close(); // CLose any pre-existing reader
+                }
+                Console.WriteLine("Enter the User : ");
+                string uName = Console.ReadLine();
+
+                Console.WriteLine("Enter the Password : ");
+                string uPass = Console.ReadLine();
+
+                //------------- <Sql Command initiation> ------------- 
+                cmd.Connection = con; // connection between the command obj and the db conn
+                // not a good way to pass parameters, this my lead to sql injection 
+                cmd.CommandText = $"Select * from Users where uid = '{uName}' and pwd = '{uPass}'"; // Checking for availability of single user
+                sdr = cmd.ExecuteReader(); // Executing the reading command as our command will send us block of data
+                bool isPresent = sdr.HasRows;
+                if (isPresent)
+                {
+                    ShowUsers();
+                }
+                else
+                {
+                    Console.WriteLine("User not valid");
+                    Console.Clear(); // clearing the console 
+                    Login();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+
+
         public static void ShowUsers()
         {
             try
             {
+                if (sdr != null)
+                {
+                    sdr.Close(); // CLose any pre-existing reader
+                }
                 //------------- <Sql Command initiation> ------------- 
                 cmd.Connection = con; // connection between the command obj and the db conn
                 cmd.CommandText = "Select * from Users"; // Query we want to execute 
@@ -32,8 +76,13 @@ namespace UserDrivenQueries
             {
                 throw ex;
             }
+            finally
+            {
+                sdr.Close();
+            }
 
         }
+
 
         static void Main(string[] args)
         {
@@ -52,14 +101,17 @@ namespace UserDrivenQueries
                 Console.WriteLine("Connection Successful");
                 //---------------------<>----------------------------------
 
-                ShowUsers();
-                
+                Login();
+
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
-            con.Close(); // always close the connection 
+            finally
+            {
+                con.Close(); // always close the connection 
+            }
         }
     }
 }
