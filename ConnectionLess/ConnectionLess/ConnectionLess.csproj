@@ -3,6 +3,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <StartupObject>disconnected1.Program</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
