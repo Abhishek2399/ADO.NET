@@ -13,9 +13,12 @@ namespace UserDrivenQueries
      
         static SqlDataReader sdr; // reader to read one record at a time
 
+        #region Login
         public static void Login() // checking if the data is present 
         {
-            // var to hold is user present or not             
+            // var to hold is user present or not
+            Console.WriteLine("==================== Login User ====================");
+
             try
             {
                 if (sdr != null) // check is reader opened earlier 
@@ -51,10 +54,14 @@ namespace UserDrivenQueries
             }
 
         }
+        #endregion
 
 
+        #region Show Users
         public static void ShowUsers()
         {
+            Console.WriteLine("==================== Show Users ====================");
+
             try
             {
                 if (sdr != null) // check is reader is opened before 
@@ -78,12 +85,14 @@ namespace UserDrivenQueries
             {
                 sdr.Close();
             }
-
         }
+        #endregion
 
-
+        #region Add User
         public static void AddUser()
         {
+            Console.WriteLine("==================== Add User ====================");
+
             try
             {
                 string uName, uPass;
@@ -114,9 +123,13 @@ namespace UserDrivenQueries
                 throw ex;
             }
         }
+        #endregion 
 
+
+        #region Delete User
         public static void DelUser()
         {
+            Console.WriteLine("==================== Delete User ====================");
             try
             {
                 string uName, uPass;
@@ -132,16 +145,17 @@ namespace UserDrivenQueries
                 cmd.Parameters.Clear();
                 if (isDeleted > 0)
                 {
-                    Console.WriteLine("User Deleted Successfully");
+                    Console.WriteLine($"{uName} User Deleted Successfully");
                     return;
                 }
-                Console.WriteLine("User Not Found");
+                Console.WriteLine($"{uName} User Not Found");
             }
             catch (Exception ex)
             {
                 throw ex;
             }
         }
+        #endregion
 
 
         static void Main(string[] args)
