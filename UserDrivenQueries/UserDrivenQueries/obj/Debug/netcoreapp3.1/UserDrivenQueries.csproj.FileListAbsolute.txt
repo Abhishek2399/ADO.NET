@@ -17,3 +17,4 @@ D:\capgemini\training\technical\ADO.NET\UserDrivenQueries\UserDrivenQueries\obj\
 D:\capgemini\training\technical\ADO.NET\UserDrivenQueries\UserDrivenQueries\obj\Debug\netcoreapp3.1\UserDrivenQueries.dll
 D:\capgemini\training\technical\ADO.NET\UserDrivenQueries\UserDrivenQueries\obj\Debug\netcoreapp3.1\UserDrivenQueries.pdb
 D:\capgemini\training\technical\ADO.NET\UserDrivenQueries\UserDrivenQueries\obj\Debug\netcoreapp3.1\UserDrivenQueries.genruntimeconfig.cache
+D:\capgemini\training\technical\ADO.NET\UserDrivenQueries\UserDrivenQueries\obj\Debug\netcoreapp3.1\UserDrivenQueries.csproj.AssemblyReference.cache
