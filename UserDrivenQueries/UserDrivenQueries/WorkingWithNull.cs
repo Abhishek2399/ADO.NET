@@ -60,7 +60,7 @@ namespace UserDrivenQueries
                 }
                 else
                 {
-                    
+                    Console.WriteLine($"{rollNo} Not found");
                 }
             }
             catch (Exception ex)
