@@ -59,7 +59,7 @@ namespace UserDrivenQueries
             {
                 Console.WriteLine(ex.Message);
             }
-
+            con.Close(); // always close the connection 
         }
     }
 }
