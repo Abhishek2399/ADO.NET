@@ -56,7 +56,6 @@ namespace UserDrivenQueries
         }
         #endregion
 
-
         #region Show Users
         public static void ShowUsers()
         {
@@ -125,7 +124,6 @@ namespace UserDrivenQueries
         }
         #endregion 
 
-
         #region Delete User
         public static void DelUser()
         {
@@ -156,7 +154,6 @@ namespace UserDrivenQueries
             }
         }
         #endregion
-
 
         #region Update User Pass
         public static void UpdateUser()
@@ -213,11 +210,20 @@ namespace UserDrivenQueries
                 cmd.Parameters.AddWithValue("@uname", uName);
                 sdr = cmd.ExecuteReader(); // Executing the reading command as our command will send us block of data
                 Console.WriteLine("-----------------------------------");
-                while (sdr.Read()) // .Read() will return true if data is present in the table 
+                // uid in the table is not primary key we can get multiple data, if it was primary key we would have got single record 
+                if (sdr.HasRows)
                 {
-                    Console.WriteLine($"User : {sdr.GetValue(0)}   Pass : {sdr.GetValue(1)}");
-                    Console.WriteLine("-----------------------------------");
+                    while (sdr.Read()) // .Read() will return true if data is present in the table 
+                    {
+                        Console.WriteLine($"User : {sdr.GetValue(0)}   Pass : {sdr.GetValue(1)}");
+                        Console.WriteLine("-----------------------------------");
+                    }
                 }
+                else
+                {
+                    Console.WriteLine($"{uName} Not Found");
+                }
+                cmd.Parameters.Clear();
             }
             catch (Exception ex)
             {
@@ -248,8 +254,13 @@ namespace UserDrivenQueries
                 Console.WriteLine("Connection Successful");
                 //---------------------<>----------------------------------
 
-                UpdateUser();
-
+                //Login();
+                //ShowUsers();
+                //DelUser();
+                //UpdateUser();
+                ShowUserByName("admin");
+                //AddUser();
+                
             }
             catch (Exception ex)
             {
